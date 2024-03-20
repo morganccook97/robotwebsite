@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dancing Image</title>
+    <style>
+        /* Style for the image */
+        #myImage {
+            width: 200px;
+            height: 200px;
+            transition: transform 0.5s ease; /* Smooth transition for rotation */
+        }
+    </style>
+</head>
+<body>
+    <img id="myImage" src="robot.png" alt="Dancing Image">
+
+    <!-- Buttons -->
+    <button onclick="rotateImage()">Rotate</button>
+    <button onclick="bounceImage()">Bounce</button>
+    <button onclick="changeColor()">Change Color</button>
+
+    <script>
+        // Get the image element
+        const image = document.getElementById("myImage");
+
+
+	// Color change animation
+        const colors = ["red", "green", "blue"];
+        let colorIndex = 0;
+        function changeColor() {
+            colorIndex = (colorIndex + 1) % colors.length;
+            image.style.filter = `hue-rotate(90deg) saturate(200%) brightness(80%)`;
+            image.style.backgroundColor = colors[colorIndex];
+        }
+        // Rotation animation
+        let rotationAngle = 0;
+        let flip = -1;
+        let flipCounter = 0
+        function rotateImage() {
+            rotationAngle += 10; // Adjust the rotation speed
+            image.style.transform = `rotate(${flip*rotationAngle}deg)`;
+            flip = flip *-1;
+            flipCounter = flipCounter+1;
+            if (flipCounter>3){
+	     flip = flip*-1;
+	     impage.style.transform = 'rotate(${0}deg)';
+             changeColor();
+             rotationAngle = 10;
+             flipCounter = 0;
+            }
+	    
+        }
+
+        // Bouncing animation
+        let bounceDirection = 1;
+        let bounceDistance = 100;
+        function bounceImage() {
+            bounceDistance *= bounceDirection;
+            image.style.transform = `translateY(${bounceDistance}px)`;
+            bounceDirection *= -1; // Reverse the direction
+        }
+
+        
+    </script>
+</body>
+</html>
